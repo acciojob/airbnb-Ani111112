@@ -47,6 +47,7 @@ public class HotelManagementRepoaitory {
 
     public int bookRoom(Booking booking) {
         String hotelName = booking.getHotelName();
+        if (!hotelMap.containsKey(hotelName))return -1;
         if (hotelMap.get(hotelName).getAvailableRooms() >= booking.getNoOfRooms()) {
             Hotel hotel = hotelMap.get(hotelName);
             int totalRoomAvilable = hotel.getAvailableRooms();
@@ -73,6 +74,7 @@ public class HotelManagementRepoaitory {
     }
 
     public Hotel updateFacilities(List<Facility> newFacilities, String hotelName) {
+        if (!hotelMap.containsKey(hotelName))return null;
         Hotel hotel = hotelMap.get(hotelName);
         List<Facility> facilities = hotel.getFacilities();
         for (int i = 0; i < newFacilities.size(); i++) {
